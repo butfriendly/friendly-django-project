@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head{% block head_attrs %}{% endblock %}>
+		<meta charset="utf-8">
+		<title>{% block head_title %}Untitled{% endblock %} — A ButFriendly production</title>
+		<meta name="viewport" content="width=960" />
+
+		<!--[if IE]><meta http-equiv="imagetoolbar" content="false" /><![endif]-->
+		<!--[if lte IE 7]><link href="{{ MEDIA_URL }}core/css/ie.css" media="screen" rel="stylesheet" type="text/css"><![endif]-->
+
+		{# Favicons #}
+		<link href="{{ MEDIA_URL }}core/img/favicon.png" rel="icon" type="image/png" />
+		<link href="{{ MEDIA_URL }}core/img/mobile_icon.png" rel="apple-touch-icon" type="image/png" />
+
+		{% block head_supplement %}
+			<link href='http://fonts.googleapis.com/css?family=Signika+Negative:300,400,600,700' rel='stylesheet' type='text/css'>
+			<style>
+				body { font-family: 'Signika Negative', sans-serif; font-size: 14px; background-color: #eef2f3; }
+				body, a, a:hover, a:checked, a:visited, a:link { color: #1c2021; }
+				#container { width: 780px; margin:0 auto; }
+				#nav {}
+				#nav li { display: inline-block; }
+			</style>
+		{% endblock %}
+	</head>
+	<body class="{{ section }}" id="{% block bodyid %}{{ section }}{% endblock %}">
+	<div id="container">
+		<div id="header">
+			{% block header %}
+				<div id="brand"><a href="/">ButFriendly</a></div>
+				<ul id="nav">
+					<li id="navA">A</li>
+					<li id="navB">B</li>
+					<li id="navC">C</li>
+					<li id="nav-search">
+						<form action="">
+							<fieldset>
+								<input name="q" title="Search this site" type="text" /><button title="Search this site" type="submit">Search</button>
+							</fieldset>
+						</form>
+					</li>
+				</ul>
+			{% endblock %}
+		</div>
+		{% block page %}
+			<h1>{% block page_title %}Untitled{% endblock %}</h1>
+			<div id="content">
+				{% block content %}{% endblock %}
+			</div>
+			<div id="supplement">
+				{% block supplement %}{% endblock %}
+			</div>
+		{% endblock %}
+		<div id="footer">
+			{% block footer %}{% endblock %}
+		</div>
+	</div>
+	{% block body_supplement %}{% endblock %}
+	{% comment %}
+		<script src="http://www.google-analytics.com/ga.js" type="text/javascript"></script>
+		<script type="text/javascript">var t = _gat._getTracker("UA-264001-4");t._setDomainName("{{ site_domain }}");t._trackPageview();</script>
+	{% endcomment %}
+	<script src="{% url wafflejs %}"></script>
+	</body>
+</html>
