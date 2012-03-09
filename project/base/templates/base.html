@@ -12,47 +12,12 @@
 		<link href="{{ MEDIA_URL }}core/img/favicon.png" rel="icon" type="image/png" />
 		<link href="{{ MEDIA_URL }}core/img/mobile_icon.png" rel="apple-touch-icon" type="image/png" />
 
-		{% block head_supplement %}
-			<link href='http://fonts.googleapis.com/css?family=Signika+Negative:300,400,600,700' rel='stylesheet' type='text/css'>
-			<style>
-				body { font-family: 'Signika Negative', sans-serif; font-size: 14px; background-color: #eef2f3; }
-				body, a, a:hover, a:checked, a:visited, a:link { color: #1c2021; }
-				#container { width: 780px; margin:0 auto; }
-				#nav {}
-				#nav li { display: inline-block; }
-			</style>
-		{% endblock %}
+		{% block head_supplement %}{% endblock %}
 	</head>
 	<body class="{{ section }}" id="{% block bodyid %}{{ section }}{% endblock %}">
 	<div id="container">
-		<div id="header">
-			{% block header %}
-				<div id="brand"><a href="/">ButFriendly</a></div>
-				<ul id="nav">
-					<li id="navA">A</li>
-					<li id="navB">B</li>
-					<li id="navC">C</li>
-					<li id="nav-search">
-						<form action="">
-							<fieldset>
-								<input name="q" title="Search this site" type="text" /><button title="Search this site" type="submit">Search</button>
-							</fieldset>
-						</form>
-					</li>
-				</ul>
-			{% endblock %}
-		</div>
-		{% block page %}
-			<h1>{% block page_title %}Untitled{% endblock %}</h1>
-			<div id="content">
-				{% block content %}{% endblock %}
-			</div>
-			<div id="supplement">
-				{% block supplement %}{% endblock %}
-			</div>
-		{% endblock %}
-		<div id="footer">
-			{% block footer %}{% endblock %}
+		<div id="content">
+			{% block content %}{% endblock %}
 		</div>
 	</div>
 	{% block body_supplement %}{% endblock %}
