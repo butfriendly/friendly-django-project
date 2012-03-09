@@ -18,6 +18,8 @@ INSTALLED_APPS = list(base.INSTALLED_APPS) + [
     'devserver',
 ]
 
+SECRET_KEY = '123'
+
 print INSTALLED_APPS
 
 DATABASES = {
