@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load compressed %}<!DOCTYPE html>
 <html lang="en-us">
 	<head{% block head_attrs %}{% endblock %}>
 		<meta charset="utf-8">
@@ -13,6 +13,9 @@
 		<link href="{{ MEDIA_URL }}core/img/mobile_icon.png" rel="apple-touch-icon" type="image/png" />
 
 		{% block head_supplement %}{% endblock %}
+
+		{% compressed_css 'common' %}
+		{% compressed_js 'common' %}
 	</head>
 	<body class="{{ section }}" id="{% block bodyid %}{{ section }}{% endblock %}">
 	<div id="container">

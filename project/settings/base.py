@@ -9,9 +9,39 @@ ROOT_URLCONF = 'project.urls'
 INSTALLED_APPS = list(INSTALLED_APPS) + [
     # Application base, containing global templates.
     'project.base',
-    # Example code. Can (and should) be removed for actual projects.
-    'project.example',
 ]
+
+PIPELINE_CSS = {
+    'common': {
+        'source_filenames': (
+            'css/core.less',
+#            'css/colors/*.less',
+#            'css/layers.less'
+        ),
+        'output_filename': 'css/common.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+}
+
+PIPELINE_JS = {
+    'jquery': {
+        'external_urls': (
+            'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js',
+            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.5.2/jquery-ui.min.js',
+        ),
+    },
+    'common': {
+        'source_filenames': (
+#            'js/d3.js',
+#            'js/collections/*.js',
+            'js/application.js',
+#            'js/templates/**/*.jst', # JavsScript templates
+        ),
+        'output_filename': 'js/common.js',
+    }
+}
 
 # SOUTH
 
