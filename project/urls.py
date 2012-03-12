@@ -18,9 +18,11 @@ urlpatterns = patterns('',
 )
 
 # Admin URLs
-if 'admin' in settings.INSTALLED_APPS:
-    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    (r'^admin/', include(admin.site.urls)),
+if 'django.contrib.admin' in settings.INSTALLED_APPS:
+    urlpatterns += patterns('',
+        (r'^admin/doc/', include('django.contrib.admindocs.urls')),
+        (r'^admin/', include(admin.site.urls)),
+    )
 
 ## In DEBUG mode, serve media files through Django.
 if settings.DEBUG:
