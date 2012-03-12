@@ -13,19 +13,19 @@ urlpatterns = patterns('',
     # Use Waffle flags directly in JavaScript
     url(r'^wafflejs$', wafflejs, name='wafflejs'),
 
-    # Admin URLs
-    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    (r'^admin/', include(admin.site.urls)),
-
     # Example:
     (r'', include(urls)),
 )
 
+# Admin URLs
+if 'admin' in settings.INSTALLED_APPS:
+    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    (r'^admin/', include(admin.site.urls)),
 
 ## In DEBUG mode, serve media files through Django.
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_URL)
+    # Just serve the files within MEDIA_ROOT
+    urlpatterns += static(settings.MEDIA_URL, view='django.views.static.serve', document_root=settings.MEDIA_ROOT)
 
-# @todo Fix pipeline
-#    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_URL)
-    urlpatterns += static(settings.STATIC_URL, document_root='/Users/csc/src/friendly-django-project/static')#settings.STATIC_URL)
+    # Same as above, but also staticfiles finders are used to find statics
+    urlpatterns += static(settings.STATIC_URL, view='django.contrib.staticfiles.views.serve', document_root=settings.STATIC_ROOT)
