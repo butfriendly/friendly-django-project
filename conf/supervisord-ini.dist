@@ -1,0 +1,14 @@
+[program:__SITE__]
+directory=/home/django/sites/__SITE__/src
+command=/home/django/bin/run_in_env.sh __SITE__ python manage.py run_gunicorn -c gunicorn.conf.py
+user=django
+umask=022
+autostart=True
+autorestart=True
+redirect_stderr=True
+stdout_logfile=/home/django/sites/__SITE__/var/log/supervisor.log
+stderr_logfile=/home/django/sites/__SITE__/var/log/supervisor-err.log
+stdout_logfile_maxbytes=5MB
+stdout_logfile_backups=10
+#environment=DJANGO_SETTINGS_MODULE='roy.settings'
+#command=/home/django/bin/run_in_env.sh __SITE__ /home/django/.virtualenv/__SITE__/bin/gunicorn_django -c gunicorn.conf.py

@@ -1,0 +1,50 @@
+upstream __SITE__-app-server {
+   server unix:/home/django/sites/__SITE__/var/run/app.sock;
+}
+
+server {
+   listen 80;
+
+   # default server
+   server_name __NAME__;
+
+   access_log /home/django/sites/__SITE__/var/log/nginx-access.log;
+   error_log  /home/django/sites/__SITE__/var/log/nginx-error.log;
+
+   # path for static files
+   root /home/django/sites/__SITE__/public;
+
+   error_page  404 /404.html;
+
+   location ~ /\.ht {
+      deny all;
+   }
+
+   error_page 403 http://__NAME__;
+   location / {
+      # This checks for a file called simply "downtime" in the public
+      # directory, and puts up the downtime page if it exists.
+      if (-f /home/django/sites/__SITE__/public/downtime) {
+         return 503;
+      }
+
+      # checks for static file, if not found proxy to app
+      try_files $uri @proxy_to_app;
+   }
+
+   location @proxy_to_app {
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $http_host;
+      proxy_redirect off;
+      proxy_pass   http://__SITE__-app-server;
+   }
+
+   error_page 500 502 503 504 @maintenance;
+   location @maintenance {
+      # In this example, there's a directory in the site media files
+      # called "downtime" that contains a "maintenance.html" file and
+      # any styles and images needed for the maintenance page.
+      root /home/django/sites/__SITE__/public/static/downtime;
+      rewrite ^(.*)$ /maintenance.html break;
+   }
+}
