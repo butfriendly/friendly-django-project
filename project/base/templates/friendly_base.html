@@ -14,6 +14,12 @@
 
     {% block site_css %}
         {% compressed_css 'common' %}
+        <style>
+            html, body { margin: 0; padding: 0; }
+            html { background-color: #EFEFEF;  }
+            body { font-size: 14px; font-family: Arial,Verdana,sans-serif; }
+            #container { width: 720px; margin: 50px auto; }
+        </style>
     {% endblock %}
 
     {% block head_supplement %}{% endblock %}
